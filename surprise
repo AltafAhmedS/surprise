@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Small Surprise!</title>
+    <style>
+        body {
+            background-color: #ffcad4;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            max-width: 400px;
+            z-index: 10;
+        }
+
+        h2 { color: #d63384; margin-bottom: 20px; }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        button {
+            padding: 10px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #yesBtn { background-color: #ff4d6d; color: white; }
+        #noBtn { background-color: #adb5bd; color: white; position: absolute; left: 150px; }
+
+        .hidden { display: none; }
+
+        /* Final Letter Styling */
+        #finalLetter {
+            background: #fffafa;
+            padding: 40px;
+            border-radius: 0;
+            border: 2px solid #ff4d6d;
+            max-width: 80% !important;
+            height: 80vh;
+            overflow-y: auto;
+        }
+
+        img { width: 200px; border-radius: 10px; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+
+    <div id="gameBox" class="container">
+        <h2 id="question">Ready for a small surprise?</h2>
+        <img id="displayImg" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueW9qZnd6Z3B3Z3B3Z3B3Z3B3Z3B3Z3B3Z3B3Z3B3Z3B3Jm09ZTMv/3oriO0OEd9QIDdllqo/giphy.gif" alt="Cat">
+        <div class="btn-container">
+            <button id="yesBtn">YES</button>
+            <button id="noBtn">NO</button>
+        </div>
+    </div>
+
+    <div id="finalLetter" class="container hidden">
+        <h1>Happy Birthday, My Love! ❤️</h1>
+        <p>Every day with you feels like a small celebration, but today the world feels extra lucky because you were born.</p>
+        <p>Thank you for filling my life with warmth and laughter. I adore your heart, your strength, and the way you make even ordinary moments beautiful.</p>
+        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+            <img src="https://via.placeholder.com/150" alt="Memory 1">
+            <img src="https://via.placeholder.com/150" alt="Memory 2">
+        </div>
+        <p><strong>With all my love, Always yours.</strong></p>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const question = document.getElementById('question');
+        const displayImg = document.getElementById('displayImg');
+        const gameBox = document.getElementById('gameBox');
+        const finalLetter = document.getElementById('finalLetter');
+
+        let clickCount = 0;
+
+        // When "No" is clicked, it behaves like the video
+        noBtn.addEventListener('click', () => {
+            if (clickCount === 0) {
+                question.innerText = "HOW DARE YOU CLICK NO!";
+                displayImg.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXAwaXN6Z3B3Z3B3Z3B3Z3B3Z3B3Z3B3Z3B3Z3B3Z3B3Jm09ZTMv/mlvseq9yvZhba/giphy.gif";
+                noBtn.style.position = 'absolute';
+                clickCount++;
+            } else {
+                // Make button run away
+                const x = Math.random() * (window.innerWidth - 100);
+                const y = Math.random() * (window.innerHeight - 50);
+                noBtn.style.left = x + 'px';
+                noBtn.style.top = y + 'px';
+            }
+        });
+
+        // When "Yes" is clicked
+        yesBtn.addEventListener('click', () => {
+            if (question.innerText === "Ready for a small surprise?") {
+                question.innerText = "Do you love me?";
+                displayImg.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueW9qZnd6Z3B3Z3B3Z3B3Z3B3Z3B3Z3B3Z3B3Z3B3Z3B3Jm09ZTMv/MDJ9IbxxvDUQM/giphy.gif";
+            } else {
+                gameBox.classList.add('hidden');
+                finalLetter.classList.remove('hidden');
+                document.body.style.backgroundImage = "url('https://www.transparenttextures.com/patterns/pucker.png')";
+            }
+        });
+    </script>
+</body>
+</html>
